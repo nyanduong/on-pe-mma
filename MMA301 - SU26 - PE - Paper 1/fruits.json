@@ -1,0 +1,196 @@
+[
+    {
+        "id": "1",
+        "fruitName": "Mango",
+        "storageTime": 10,
+        "sweetness": "High",
+        "colors": [
+            "Yellow",
+            "Orange",
+            "Green"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg",
+        "origin": "India",
+        "ripeness": 0.92
+    },
+    {
+        "id": "2",
+        "fruitName": "Banana",
+        "storageTime": 7,
+        "sweetness": "High",
+        "colors": [
+            "Yellow"
+        ],
+        "isSeedless": true,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg",
+        "origin": "Ecuador",
+        "ripeness": 0.88
+    },
+    {
+        "id": "3",
+        "fruitName": "Dragon Fruit",
+        "storageTime": 14,
+        "sweetness": "Medium",
+        "colors": [
+            "Pink",
+            "White"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/4/43/Pitaya_cross_section_ed2.jpg",
+        "origin": "Vietnam",
+        "ripeness": 0.76
+    },
+    {
+        "id": "4",
+        "fruitName": "Strawberry",
+        "storageTime": 4,
+        "sweetness": "Medium",
+        "colors": [
+            "Red"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg",
+        "origin": "United States",
+        "ripeness": 0.8
+    },
+    {
+        "id": "5",
+        "fruitName": "Watermelon",
+        "storageTime": 21,
+        "sweetness": "High",
+        "colors": [
+            "Green",
+            "Red"
+        ],
+        "isSeedless": true,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/4/40/Watermelons.jpg",
+        "origin": "China",
+        "ripeness": 0.73
+    },
+    {
+        "id": "6",
+        "fruitName": "Kiwi",
+        "storageTime": 28,
+        "sweetness": "Medium",
+        "colors": [
+            "Brown",
+            "Green"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Kiwi_aka.jpg",
+        "origin": "New Zealand",
+        "ripeness": 0.61
+    },
+    {
+        "id": "7",
+        "fruitName": "Apple",
+        "storageTime": 35,
+        "sweetness": "Medium",
+        "colors": [
+            "Red",
+            "Green"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
+        "origin": "United States",
+        "ripeness": 0.95
+    },
+    {
+        "id": "8",
+        "fruitName": "Grapes",
+        "storageTime": 12,
+        "sweetness": "High",
+        "colors": [
+            "Purple",
+            "Green"
+        ],
+        "isSeedless": true,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Table_grapes_on_white.jpg",
+        "origin": "Italy",
+        "ripeness": 0.67
+    },
+    {
+        "id": "9",
+        "fruitName": "Orange",
+        "storageTime": 30,
+        "sweetness": "Medium",
+        "colors": [
+            "Orange"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg",
+        "origin": "Spain",
+        "ripeness": 0.84
+    },
+    {
+        "id": "10",
+        "fruitName": "Pineapple",
+        "storageTime": 16,
+        "sweetness": "High",
+        "colors": [
+            "Yellow",
+            "Green"
+        ],
+        "isSeedless": true,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg",
+        "origin": "Costa Rica",
+        "ripeness": 0.58
+    },
+    {
+        "id": "11",
+        "fruitName": "Peach",
+        "storageTime": 6,
+        "sweetness": "High",
+        "colors": [
+            "Orange",
+            "Pink"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Autumn_Red_peaches.jpg",
+        "origin": "China",
+        "ripeness": 0.7
+    },
+    {
+        "id": "12",
+        "fruitName": "Blueberry",
+        "storageTime": 9,
+        "sweetness": "Low",
+        "colors": [
+            "Blue",
+            "Purple"
+        ],
+        "isSeedless": true,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/1/15/Blueberries.jpg",
+        "origin": "Canada",
+        "ripeness": 0.49
+    },
+    {
+        "id": "13",
+        "fruitName": "Papaya",
+        "storageTime": 8,
+        "sweetness": "Medium",
+        "colors": [
+            "Orange",
+            "Green"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Papaya_-_longitudinal_section.jpg/500px-Papaya_-_longitudinal_section.jpg",
+        "origin": "Vietnam",
+        "ripeness": 0.64
+    },
+    {
+        "id": "14",
+        "fruitName": "Lychee",
+        "storageTime": 5,
+        "sweetness": "High",
+        "colors": [
+            "Red",
+            "White"
+        ],
+        "isSeedless": false,
+        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Litchi_chinensis_fruits.JPG/500px-Litchi_chinensis_fruits.JPG",
+        "origin": "Vietnam",
+        "ripeness": 0.72
+    }
+]
