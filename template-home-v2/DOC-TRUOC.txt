@@ -1,0 +1,54 @@
+V2 — HOME CÓ THANH TAB HOME / FAVORITES
+MỞ VÀ CHẠY MẪU
+Trong terminal ở gốc ON-PE-MMA: cd template-home-v2
+Nếu vừa copy sang máy mới: npm ci (làm khi còn Internet).
+Gõ npm start. Trên LDPlayer, mở Expo Go. Home mẫu có Xe buýt trên Cơm trưa.
+Đây là project Expo JavaScript hoàn chỉnh cho phần Home. Muốn luyện, copy cả thư mục
+sang tên project theo đề; bỏ node_modules và .expo khi chép sang máy khác,
+rồi npm ci khi còn mạng. Đổi name trong package.json, name và slug trong app.json.
+
+NẾU ĐÃ TẠO PROJECT BLANK: COPY THEO THỨ TỰ
+1. src/components/ItemCard.js: cách vẽ một dòng.
+2. src/data/asyncItems.js HOẶC src/data/sqliteItems.js: chọn đúng nguồn đề bắt buộc.
+3. src/screens/HomeScreen.js: chỉ giữ import readItems cho file vừa chọn.
+4. App.js: mở Home. Cài gói còn thiếu lúc có mạng:
+   AsyncStorage: npx expo install @react-native-async-storage/async-storage
+   SQLite: npx expo install expo-sqlite
+
+SỬA THEO ĐỀ
+0. HomeScreen → chọn import AsyncStorage hoặc SQLite. Mặc định là AsyncStorage.
+1. HomeScreen → đổi STORAGE_KEY, TITLE, firstItems. Giữ id riêng cho từng item.
+   Đổi key nếu chuyển đề để không đọc dữ liệu cũ. Với SQLite, sửa cả bảng/cột và INSERT.
+2. ItemCard → sửa các dòng Text cho khớp tên trường đề. Ví dụ item.product_name.
+3. HomeScreen → sửa SEARCH_FIELD, FILTER_FIELD và DATE_FIELD theo đề.
+4. Chạy trước khi làm tiếp. Kéo xuống để đọc lại dữ liệu.
+   Xem phần THÊM THANH TAB DƯỚI ở cuối file để dùng mẫu điều hướng.
+
+CHỌN SOURCE GẦN ĐỀ THI NHẤT
+Lab 9: phim. SQLite, tìm theo tên, chi tiết/sửa/xóa, trung bình điểm, đếm theo thể loại.
+Lab 10: tranh. Thêm tìm theo nghệ sĩ, lọc loại, Favorites và thống kê riêng.
+Lab 11: điện thoại. Thêm tồn kho, nổi bật, doanh thu = giá × số đã bán.
+Lab 12: máy tính. Thêm CPU/RAM/ổ cứng, lọc giá, sắp xếp, top brand và best seller.
+Lab 13: hóa đơn. Home và Unpaid, banner, nhấn mở Update, tổng tiền chưa thanh toán.
+Lab 9–12 yêu cầu SQLite; Lab 13 cho SQLite hoặc AsyncStorage. Cả 5 đều cần Bottom Tabs.
+Đề chi tiêu FA24 yêu cầu AsyncStorage; xem tên, số tiền, ngày và loại ở mẫu này.
+
+HOME DANH SÁCH — không cần banner.
+Trong HomeScreen.js tìm SỬA 3. Ba dòng điều khiển ô tìm tên, nút lọc và thứ tự ngày.
+Ass2: SEARCH_FIELD = 'station_name'; FILTER_FIELD = 'status'; DATE_FIELD = null.
+Lab 9: SEARCH_FIELD = 'movie_title'; FILTER_FIELD = null; DATE_FIELD = null.
+Đề chi tiêu: dùng 'expenseName', 'category', 'date'. Nếu đề chỉ hỏi danh sách thì tắt tìm và lọc bằng null.
+Các thẻ lọc tự lấy giá trị từ dữ liệu. Khi đổi đề vẫn phải đổi firstItems, ItemCard và nguồn lưu.
+
+THÊM THANH TAB DƯỚI (sau khi Home đã chạy)
+1. Copy src/navigation/AppNavigator.js và src/screens/FavoritesScreen.js vào cùng đường dẫn ở project mới.
+2. Copy App.js và HomeScreen.js của mẫu này (hoặc thêm props title, includeItem vào Home đã sửa như trong mẫu).
+3. Nếu chưa cài, khi còn mạng chạy:
+   npx expo install @react-navigation/native@7 @react-navigation/bottom-tabs@7 react-native-screens react-native-safe-area-context
+4. Trong AppNavigator.js, mỗi Tab.Screen là một tab. Đổi headerTitle thành tên app theo đề.
+   Ví dụ trạm sạc: đổi name="Favorites" thành name="Available". Trong FavoritesScreen.js
+   đổi title thành "Available Stations", điều kiện thành item.status === 'Available'.
+   Nếu đề có màn hình thứ ba, import component của màn đó, thêm một Tab.Screen tương ứng.
+5. Chạy npm start. Bấm từng tab rồi quay lại Home. Dữ liệu mẫu mặc định chưa đánh dấu yêu thích,
+   nên Favorites có thể trống. Để thử ngay, đánh dấu isFavorite: true cho một dòng mẫu và dùng
+   STORAGE_KEY mới khi luyện để đọc lại mẫu đó.

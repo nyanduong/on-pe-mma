@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Home Practice V2",
+    "slug": "template-home-v2",
+    "orientation": "portrait",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+SỬ DỤNG TEMPLATE HOME TRONG PHÒNG THI
+
+1. Đọc đúng 3 chỗ trong đề
+   Data Storage: SQLite hay AsyncStorage?
+   Data Structure: tên từng trường viết chính xác thế nào? Ví dụ movie_title.
+   Task 1 / Home: một thẻ hiện trường nào? Có yêu cầu sắp xếp, lọc, kéo để tải lại không?
+
+2. Mở hai thư mục cạnh nhau trong VS Code
+   Bên trái: template-home (mẫu để copy). Bên phải: project mang tên đề yêu cầu (nơi dán và sửa).
+   Nếu chưa tạo project, làm theo lenh-tao-project.txt khi còn Internet.
+
+3. Copy 4 file từ template-home sang ĐÚNG vị trí trong project mới
+   [1] src/components/ItemCard.js → src/components/ItemCard.js
+   [2] Chọn MỘT file dữ liệu, giữ nguyên đường dẫn khi dán:
+       Đề ghi AsyncStorage → src/data/asyncItems.js
+       Đề ghi SQLite       → src/data/sqliteItems.js
+   [3] src/screens/HomeScreen.js → src/screens/HomeScreen.js
+   [4] Nếu chỉ làm Home: ghi trong App.js: export {default} from './src/screens/HomeScreen';
+   Nếu đã copy nguyên project template-home thì bỏ qua bước copy 4 file.
+
+4. Trong HomeScreen.js, tìm chữ SỬA
+   SỬA 0: giữ đúng một dòng import readItems trỏ tới file đã chọn ở bước 3.
+   SỬA 1: đổi TITLE thành tiêu đề đề yêu cầu. Đổi STORAGE_KEY theo bài, ví dụ movies.
+          Đổi firstItems thành dữ liệu mẫu của đề. Nếu đề yêu cầu bắt đầu trống, dùng [].
+   SỬA 3: chọn trường tìm, lọc và ngày. Đề không sắp theo ngày thì DATE_FIELD = null.
+   GIỮ: readItems(...), setItems, FlatList, renderItem và onRefresh.
+
+5. Trong ItemCard.js, tìm SỬA 2
+   Đổi từng dòng Text để đọc đúng tên trường. Ví dụ Lab 9 dùng:
+       <Text>ID: {item.id}</Text>
+       <Text>{item.movie_title}</Text>
+       <Text>Genre: {item.genre}</Text>
+       <Text>Year: {item.release_year}</Text>
+       <Text>Rating: {item.rating}</Text>
+   Giữ tên prop item và phần style. Mỗi item phải có id riêng để FlatList nhận diện.
+
+6. Hoàn thiện phần lưu
+   AsyncStorage: giữ nguyên asyncItems.js. Lần đầu dùng firstItems, lần sau đọc dữ liệu đã lưu.
+   SQLite: trong sqliteItems.js đổi bảng/cột ở CREATE TABLE, INSERT và SELECT cho khớp đề.
+   Ví dụ Lab 9: bảng movies, id INTEGER PRIMARY KEY AUTOINCREMENT, movie_title TEXT,
+   genre TEXT, release_year INTEGER, rating REAL. Khi id tự tăng, câu INSERT dùng:
+       INSERT INTO movies (movie_title, genre, release_year, rating) VALUES (?, ?, ?, ?)
+   Truyền lần lượt item.movie_title, item.genre, item.release_year, item.rating.
+   Dòng đọc cuối dùng SELECT * FROM movies ORDER BY id. Tham khảo lab09-movies/src/data/database.js.
+
+7. Tự kiểm tra trên LDPlayer
+   Trong project mới chạy npm start (nếu đang chạy thì chỉ cần lưu file). Mở app trong Expo Go.
+   Với Lab 9: Home hiện Movie Manager, thẻ Inception có Sci-Fi, 2010 và 4.8. Kéo xuống để tải lại.
+   Thẻ có nhưng tên trống? So tên sau item. với tên trường trong dữ liệu.
+   Đổi dữ liệu mẫu mà vẫn thấy dữ liệu cũ? Mẫu chỉ nạp lần đầu. Khi luyện đề mới dùng STORAGE_KEY mới.
+
+Mốc trên hoàn thành phần danh sách Home. Kiểm tiếp đề xem còn chấm tab, tìm kiếm, banner,
+nút thêm/xóa hoặc bấm để mở chi tiết không. Làm từng mục và chạy thử sau mỗi lần sửa.
+
+HOME DANH SÁCH — không cần banner.
+Trong HomeScreen.js tìm SỬA 3. Ba dòng điều khiển ô tìm tên, nút lọc và thứ tự ngày.
+Ass2: SEARCH_FIELD = 'station_name'; FILTER_FIELD = 'status'; DATE_FIELD = null.
+Lab 9: SEARCH_FIELD = 'movie_title'; FILTER_FIELD = null; DATE_FIELD = null.
+Đề chi tiêu: dùng 'expenseName', 'category', 'date'. Nếu đề chỉ hỏi danh sách thì tắt tìm và lọc bằng null.
+Các thẻ lọc tự lấy giá trị từ dữ liệu. Khi đổi đề vẫn phải đổi firstItems, ItemCard và nguồn lưu.
+
+THÊM THANH TAB DƯỚI (sau khi Home đã chạy)
+1. Copy src/navigation/AppNavigator.js và src/screens/FavoritesScreen.js vào cùng đường dẫn ở project mới.
+2. Copy App.js và HomeScreen.js của mẫu này (hoặc thêm props title, includeItem vào Home đã sửa như trong mẫu).
+3. Nếu chưa cài, khi còn mạng chạy:
+   npx expo install @react-navigation/native@7 @react-navigation/bottom-tabs@7 react-native-screens react-native-safe-area-context
+4. Trong AppNavigator.js, mỗi Tab.Screen là một tab. Đổi headerTitle thành tên app theo đề.
+   Ví dụ trạm sạc: đổi name="Favorites" thành name="Available". Trong FavoritesScreen.js
+   đổi title thành "Available Stations", điều kiện thành item.status === 'Available'.
+   Nếu đề có màn hình thứ ba, import component của màn đó, thêm một Tab.Screen tương ứng.
+5. Chạy npm start. Bấm từng tab rồi quay lại Home. Dữ liệu mẫu mặc định chưa đánh dấu yêu thích,
+   nên Favorites có thể trống. Để thử ngay, đánh dấu isFavorite: true cho một dòng mẫu và dùng
+   STORAGE_KEY mới khi luyện để đọc lại mẫu đó.
