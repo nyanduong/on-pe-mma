@@ -2,6 +2,7 @@
   "expo": {
     "name": "Home Practice",
     "slug": "template-home",
+    "orientation": "portrait",
     "version": "1.0.0",
     "plugins": [
       "expo-sqlite"

@@ -2,6 +2,7 @@
   "expo": {
     "name": "Movie Manager",
     "slug": "lab09-movies",
+    "orientation": "portrait",
     "version": "1.0.0",
     "plugins": [
       "expo-sqlite"

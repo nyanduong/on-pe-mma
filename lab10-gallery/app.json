@@ -2,6 +2,7 @@
   "expo": {
     "name": "Art Gallery Manager",
     "slug": "lab10-gallery",
+    "orientation": "portrait",
     "version": "1.0.0",
     "plugins": [
       "expo-sqlite"

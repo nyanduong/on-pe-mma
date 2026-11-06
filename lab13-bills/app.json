@@ -2,6 +2,7 @@
   "expo": {
     "name": "Recurring Bills",
     "slug": "lab13-bills",
+    "orientation": "portrait",
     "version": "1.0.0",
     "plugins": [
       "expo-sqlite"

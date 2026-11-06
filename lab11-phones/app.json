@@ -2,6 +2,7 @@
   "expo": {
     "name": "Mobile Store Manager",
     "slug": "lab11-phones",
+    "orientation": "portrait",
     "version": "1.0.0",
     "plugins": [
       "expo-sqlite"
