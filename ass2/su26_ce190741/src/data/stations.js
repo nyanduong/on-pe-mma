@@ -1,21 +1,66 @@
-export function prepareDatabase(db) {
-  return db.execAsync(`CREATE TABLE IF NOT EXISTS stations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    station_name TEXT NOT NULL,
-    location TEXT NOT NULL,
-    charging_power INTEGER NOT NULL,
-    status TEXT NOT NULL
-  )`);
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { readOldStations } from './readOldStations';
+
+const KEY = 'stations';
+let firstLoad;
+let pendingWrite = Promise.resolve();
+
+function fromList(stations) {
+  const lastId = stations.reduce((max, item) => Math.max(max, item.id), 0);
+  return { lastId, stations };
 }
 
-export function readStations(db) {
-  return db.getAllAsync('SELECT * FROM stations ORDER BY id');
+async function importOldList() {
+  const store = fromList(await readOldStations());
+  await AsyncStorage.setItem(KEY, JSON.stringify(store));
+  return store;
 }
 
-export function saveStation(db, station) {
-  const values = [station.station_name, station.location, station.charging_power, station.status];
-  if (station.id == null) {
-    return db.runAsync('INSERT INTO stations (station_name, location, charging_power, status) VALUES (?, ?, ?, ?)', values);
+async function readStore() {
+  const json = await AsyncStorage.getItem(KEY);
+  if (json !== null) {
+    const value = JSON.parse(json);
+    return Array.isArray(value) ? fromList(value) : value;
   }
-  return db.runAsync('UPDATE stations SET station_name=?, location=?, charging_power=?, status=? WHERE id=?', [...values, station.id]);
+  if (!firstLoad) {
+    firstLoad = importOldList().catch(error => {
+      firstLoad = undefined;
+      throw error;
+    });
+  }
+  return firstLoad;
+}
+
+export async function readStations() {
+  return (await readStore()).stations;
+}
+
+// Mỗi lần lưu/xóa đọc bản mới nhất rồi ghi danh sách và bộ đếm ID cùng nhau.
+function changeStore(change) {
+  const write = pendingWrite.then(async () => {
+    const store = await readStore();
+    change(store);
+    await AsyncStorage.setItem(KEY, JSON.stringify(store));
+  });
+  pendingWrite = write.catch(() => {});
+  return write;
+}
+
+export function saveStation(station) {
+  return changeStore(store => {
+    if (station.id == null) {
+      store.lastId += 1;
+      store.stations.push({ ...station, id: store.lastId });
+    } else {
+      const index = store.stations.findIndex(item => item.id === station.id);
+      if (index < 0) throw new Error('Station no longer exists.');
+      store.stations[index] = station;
+    }
+  });
+}
+
+export function deleteStation(id) {
+  return changeStore(store => {
+    store.stations = store.stations.filter(item => item.id !== id);
+  });
 }

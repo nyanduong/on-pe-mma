@@ -1,18 +1,41 @@
 import { useRef, useState } from 'react';
 import { Alert, Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useSQLiteContext } from 'expo-sqlite';
-import { saveStation } from '../data/stations';
+import { deleteStation, saveStation } from '../data/stations';
 
 const statuses = ['Available', 'Occupied', 'Maintenance', 'Offline'];
 
 export default function StationFormScreen({ navigation, route }) {
-  const db = useSQLiteContext();
   const station = route.params?.station;
   const [name, setName] = useState(station?.station_name ?? '');
   const [location, setLocation] = useState(station?.location ?? '');
   const [power, setPower] = useState(String(station?.charging_power ?? ''));
   const [status, setStatus] = useState(station?.status ?? 'Available');
   const saving = useRef(false);
+
+  function backToHome() {
+    navigation.popTo('Stations', { screen: 'Home' });
+  }
+
+  function confirmDelete() {
+    Alert.alert('Delete station?', station.station_name, [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Delete', style: 'destructive', onPress: remove },
+    ]);
+  }
+
+  async function remove() {
+    if (saving.current) return;
+    saving.current = true;
+    try {
+      await deleteStation(station.id);
+      backToHome();
+      Alert.alert('Station deleted');
+    } catch (error) {
+      Alert.alert('Cannot delete station', error.message);
+    } finally {
+      saving.current = false;
+    }
+  }
 
   async function save() {
     if (saving.current) return;
@@ -23,8 +46,9 @@ export default function StationFormScreen({ navigation, route }) {
     }
     saving.current = true;
     try {
-      await saveStation(db, { id: station?.id, station_name: name.trim(), location: location.trim(), charging_power: kw, status });
-      navigation.goBack();
+      await saveStation({ id: station?.id, station_name: name.trim(), location: location.trim(), charging_power: kw, status });
+      backToHome();
+      Alert.alert(station ? 'Station updated' : 'Station added');
     } catch (error) {
       Alert.alert('Cannot save station', error.message);
     } finally {
@@ -47,6 +71,8 @@ export default function StationFormScreen({ navigation, route }) {
         </Pressable>
       ))}</View>
       <Button title={station ? 'Update' : 'Add station'} onPress={save} />
+      {station && <Button title="Delete" color="#aa2532" onPress={confirmDelete} />}
+      <Button title="Back" onPress={backToHome} />
     </ScrollView>
   );
 }
