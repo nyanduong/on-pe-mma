@@ -1,23 +1,18 @@
-# 1. Khi còn Internet: thay ten-theo-de-yeu-cau ở cả hai dòng.
+# PROJECT MỚI — bước 1 và 2 chạy khi còn Internet.
+# 1. Thay ten-theo-de-yeu-cau ở cả hai dòng bên dưới.
 npx create-expo-app@latest ten-theo-de-yeu-cau --template blank --no-agents-md
 cd ten-theo-de-yeu-cau
-New-Item -ItemType Directory -Force -Path src/components, src/screens
+New-Item -ItemType Directory -Force -Path src/components, src/screens, src/data
 
-# 2. Làm Home và lưu danh sách khi offline: cài AsyncStorage lúc còn Internet.
-# FlatList có sẵn trong React Native.
-npx expo install @react-native-async-storage/async-storage
+# 2. Cài một lượt các gói của bộ đề ôn (kể cả camera, vị trí, thông báo đã cài dự phòng).
+npx expo install expo-sqlite @react-native-async-storage/async-storage @react-navigation/native@7 @react-navigation/bottom-tabs@7 @react-navigation/native-stack@7 react-native-screens react-native-safe-area-context @react-native-community/datetimepicker react-native-svg expo-camera expo-location expo-notifications
 
-# Thứ tự copy: Card trong src/components → HomeScreen.js trong src/screens → App.js mở HomeScreen.
-
-# 3. Chạy app với Expo Go trên LDPlayer (terminal trong thư mục project).
+# 3. Đợi cài thành công, kiểm tra phiên bản rồi chạy app.
+npx expo install --check
 npm start
-# Giữ terminal mở. Trong LDPlayer, mở Expo Go và chọn project nếu thấy.
-# Nếu chưa thấy, chọn Enter URL manually rồi nhập địa chỉ exp://... từ terminal.
-# Trước buổi thi, thử ngắt Internet và sửa một dòng chữ để kiểm tra app vẫn cập nhật.
+# Mở Expo Go tương thích trên LDPlayer, chọn project hoặc nhập địa chỉ exp://... từ terminal.
+# Trước buổi thi: ngắt Internet, giữ terminal mở, sửa một dòng chữ rồi lưu để thử reload.
 
-# Nếu luyện offline và chưa biết đề nào: sau khi cd vào project, khi CÒN mạng,
-# cài một lượt bộ dùng trong Lab 9–13 và Home chi tiêu. Làm trước npm start.
-npx expo install expo-sqlite @react-native-async-storage/async-storage @react-navigation/native@7 @react-navigation/bottom-tabs@7 @react-navigation/native-stack@7 react-native-screens react-native-safe-area-context
-
-# Project có sẵn: từ gốc ON-PE-MMA, vào template-home hoặc lab09-movies rồi npm start.
-# Xem template-home/DOC-TRUOC.txt để biết thứ tự copy.
+# PROJECT ĐÃ COPY NGUYÊN THƯ MỤC: nếu có package-lock.json nhưng thiếu node_modules,
+# mở terminal trong project và chạy npm ci khi còn Internet, rồi npm start.
+# Thứ tự copy Home: xem template-home/DOC-TRUOC.txt.
