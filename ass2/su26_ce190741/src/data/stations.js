@@ -42,7 +42,7 @@ function changeStore(change) {
     change(store);
     await AsyncStorage.setItem(KEY, JSON.stringify(store));
   });
-  pendingWrite = write.catch(() => {});
+  pendingWrite = write.catch(() => { });
   return write;
 }
 
