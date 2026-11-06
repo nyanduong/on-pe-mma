@@ -1,0 +1,1 @@
+npx create-expo-app@latest ten-theo-de-yeu-cau --template blank --no-agents-md
