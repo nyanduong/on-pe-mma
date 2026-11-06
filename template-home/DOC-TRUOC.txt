@@ -1,0 +1,34 @@
+MỞ VÀ CHẠY MẪU
+Trong terminal ở gốc ON-PE-MMA: cd template-home
+Nếu vừa copy sang máy mới: npm ci (làm khi còn Internet).
+Gõ npm start. Trên LDPlayer, mở Expo Go. Home mẫu có Xe buýt trên Cơm trưa.
+Đây là project Expo JavaScript hoàn chỉnh cho phần Home. Muốn luyện, copy cả thư mục
+sang tên project theo đề; bỏ node_modules và .expo khi chép sang máy khác,
+rồi npm ci khi còn mạng. Đổi name trong package.json, name và slug trong app.json.
+
+NẾU ĐÃ TẠO PROJECT BLANK: COPY THEO THỨ TỰ
+1. src/components/ItemCard.js: cách vẽ một dòng.
+2. src/data/asyncItems.js HOẶC src/data/sqliteItems.js: chọn đúng nguồn đề bắt buộc.
+3. src/screens/HomeScreen.js: chỉ giữ import readItems cho file vừa chọn.
+4. App.js: mở Home. Cài gói còn thiếu lúc có mạng:
+   AsyncStorage: npx expo install @react-native-async-storage/async-storage
+   SQLite: npx expo install expo-sqlite
+
+SỬA THEO ĐỀ
+0. HomeScreen → chọn import AsyncStorage hoặc SQLite. Mặc định là AsyncStorage.
+1. HomeScreen → đổi STORAGE_KEY, TITLE, firstItems. Giữ id riêng cho từng item.
+   Đổi key nếu chuyển đề để không đọc dữ liệu cũ. Với SQLite, sửa cả bảng/cột và INSERT.
+2. ItemCard → sửa các dòng Text cho khớp tên trường đề. Ví dụ item.product_name.
+3. HomeScreen → sửa const rows. Không yêu cầu ngày thì dùng const rows = items;
+   Ví dụ lọc: const rows = items.filter(item => item.status === 'Unpaid');
+4. Chạy trước khi làm tiếp. Kéo xuống để đọc lại dữ liệu.
+   Mẫu này chỉ giải phần Home. Đề cần Bottom Tabs thì xem App.js của lab gần nhất.
+
+CHỌN SOURCE GẦN ĐỀ THI NHẤT
+Lab 9: phim. SQLite, tìm theo tên, chi tiết/sửa/xóa, trung bình điểm, đếm theo thể loại.
+Lab 10: tranh. Thêm tìm theo nghệ sĩ, lọc loại, Favorites và thống kê riêng.
+Lab 11: điện thoại. Thêm tồn kho, nổi bật, doanh thu = giá × số đã bán.
+Lab 12: máy tính. Thêm CPU/RAM/ổ cứng, lọc giá, sắp xếp, top brand và best seller.
+Lab 13: hóa đơn. Home và Unpaid, banner, nhấn mở Update, tổng tiền chưa thanh toán.
+Lab 9–12 yêu cầu SQLite; Lab 13 cho SQLite hoặc AsyncStorage. Cả 5 đều cần Bottom Tabs.
+Đề chi tiêu FA24 yêu cầu AsyncStorage; xem tên, số tiền, ngày và loại ở mẫu này.

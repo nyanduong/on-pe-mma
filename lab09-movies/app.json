@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Movie Manager",
+    "slug": "lab09-movies",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}

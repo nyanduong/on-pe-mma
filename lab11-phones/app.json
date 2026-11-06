@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Mobile Store Manager",
+    "slug": "lab11-phones",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}

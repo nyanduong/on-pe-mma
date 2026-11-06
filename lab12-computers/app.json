@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Computer Store Manager",
+    "slug": "lab12-computers",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}

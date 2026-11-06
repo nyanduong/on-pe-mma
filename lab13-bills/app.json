@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Recurring Bills",
+    "slug": "lab13-bills",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}

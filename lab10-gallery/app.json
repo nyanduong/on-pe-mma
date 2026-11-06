@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Art Gallery Manager",
+    "slug": "lab10-gallery",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}
