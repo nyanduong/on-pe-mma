@@ -22,9 +22,7 @@ SỬ DỤNG TEMPLATE HOME TRONG PHÒNG THI
    SỬA 0: giữ đúng một dòng import readItems trỏ tới file đã chọn ở bước 3.
    SỬA 1: đổi TITLE thành tiêu đề đề yêu cầu. Đổi STORAGE_KEY theo bài, ví dụ movies.
           Đổi firstItems thành dữ liệu mẫu của đề. Nếu đề yêu cầu bắt đầu trống, dùng [].
-   SỬA 3: nếu đề không yêu cầu xếp theo ngày, thay cả dòng const rows = ... bằng:
-          const rows = items;
-          Đặc biệt: nếu dữ liệu không có date mà còn giữ dòng sort theo date thì Home có thể lỗi.
+   SỬA 3: chọn trường tìm, lọc và ngày. Đề không sắp theo ngày thì DATE_FIELD = null.
    GIỮ: readItems(...), setItems, FlatList, renderItem và onRefresh.
 
 5. Trong ItemCard.js, tìm SỬA 2
@@ -53,3 +51,10 @@ SỬ DỤNG TEMPLATE HOME TRONG PHÒNG THI
 
 Mốc trên hoàn thành phần danh sách Home. Kiểm tiếp đề xem còn chấm tab, tìm kiếm, banner,
 nút thêm/xóa hoặc bấm để mở chi tiết không. Làm từng mục và chạy thử sau mỗi lần sửa.
+
+HOME DANH SÁCH — không cần banner.
+Trong HomeScreen.js tìm SỬA 3. Ba dòng điều khiển ô tìm tên, nút lọc và thứ tự ngày.
+Ass2: SEARCH_FIELD = 'station_name'; FILTER_FIELD = 'status'; DATE_FIELD = null.
+Lab 9: SEARCH_FIELD = 'movie_title'; FILTER_FIELD = null; DATE_FIELD = null.
+Đề chi tiêu: dùng 'expenseName', 'category', 'date'. Nếu đề chỉ hỏi danh sách thì tắt tìm và lọc bằng null.
+Các thẻ lọc tự lấy giá trị từ dữ liệu. Khi đổi đề vẫn phải đổi firstItems, ItemCard và nguồn lưu.

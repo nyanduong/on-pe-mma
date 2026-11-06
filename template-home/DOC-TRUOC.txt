@@ -19,8 +19,7 @@ SỬA THEO ĐỀ
 1. HomeScreen → đổi STORAGE_KEY, TITLE, firstItems. Giữ id riêng cho từng item.
    Đổi key nếu chuyển đề để không đọc dữ liệu cũ. Với SQLite, sửa cả bảng/cột và INSERT.
 2. ItemCard → sửa các dòng Text cho khớp tên trường đề. Ví dụ item.product_name.
-3. HomeScreen → sửa const rows. Không yêu cầu ngày thì dùng const rows = items;
-   Ví dụ lọc: const rows = items.filter(item => item.status === 'Unpaid');
+3. HomeScreen → sửa SEARCH_FIELD, FILTER_FIELD và DATE_FIELD theo đề.
 4. Chạy trước khi làm tiếp. Kéo xuống để đọc lại dữ liệu.
    Mẫu này chỉ giải phần Home. Đề cần Bottom Tabs thì xem App.js của lab gần nhất.
 
@@ -32,3 +31,10 @@ Lab 12: máy tính. Thêm CPU/RAM/ổ cứng, lọc giá, sắp xếp, top brand
 Lab 13: hóa đơn. Home và Unpaid, banner, nhấn mở Update, tổng tiền chưa thanh toán.
 Lab 9–12 yêu cầu SQLite; Lab 13 cho SQLite hoặc AsyncStorage. Cả 5 đều cần Bottom Tabs.
 Đề chi tiêu FA24 yêu cầu AsyncStorage; xem tên, số tiền, ngày và loại ở mẫu này.
+
+HOME DANH SÁCH — không cần banner.
+Trong HomeScreen.js tìm SỬA 3. Ba dòng điều khiển ô tìm tên, nút lọc và thứ tự ngày.
+Ass2: SEARCH_FIELD = 'station_name'; FILTER_FIELD = 'status'; DATE_FIELD = null.
+Lab 9: SEARCH_FIELD = 'movie_title'; FILTER_FIELD = null; DATE_FIELD = null.
+Đề chi tiêu: dùng 'expenseName', 'category', 'date'. Nếu đề chỉ hỏi danh sách thì tắt tìm và lọc bằng null.
+Các thẻ lọc tự lấy giá trị từ dữ liệu. Khi đổi đề vẫn phải đổi firstItems, ItemCard và nguồn lưu.

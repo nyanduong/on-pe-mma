@@ -1,19 +1,25 @@
 import {openDatabaseAsync} from 'expo-sqlite';
 
+// SỬA tên bảng ở đây. Ví dụ đề trạm sạc dùng 'charging_stations'.
+const TABLE = 'expenses';
+
 // SỬA khi dùng SQLite: đổi tên cột và câu INSERT theo bảng trong đề.
 // Ví dụ hoàn chỉnh theo từng đề nằm trong lab09...lab13/src/data/database.js.
 export async function readItems(key, sample) {
   const db = await openDatabaseAsync(key + '.db');
   await db.withExclusiveTransactionAsync(async (tx) => {
-    const version = await tx.getFirstAsync('PRAGMA user_version');
-    if (version.user_version > 0) return;
-    await tx.execAsync(`CREATE TABLE expenses (
+    const table = await tx.getFirstAsync(
+      "SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?",
+      TABLE,
+    );
+    if (table) return;
+    await tx.execAsync(`CREATE TABLE ${TABLE} (
       id TEXT PRIMARY KEY, expenseName TEXT, amount REAL,
       date TEXT, category TEXT, isFavorite INTEGER
     )`);
     for (const item of sample) {
       await tx.runAsync(
-        'INSERT INTO expenses VALUES (?, ?, ?, ?, ?, ?)',
+        `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?)`,
         item.id,
         item.expenseName,
         item.amount,
@@ -22,7 +28,6 @@ export async function readItems(key, sample) {
         Number(item.isFavorite),
       );
     }
-    await tx.execAsync('PRAGMA user_version = 1');
   });
-  return db.getAllAsync('SELECT * FROM expenses');
+  return db.getAllAsync(`SELECT * FROM ${TABLE}`);
 }
